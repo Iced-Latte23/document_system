@@ -32,48 +32,21 @@
 
             <!-- Document Statistics -->
             <div class="statistics">
-                <h2>Document Statistics</h2>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <i class="fas fa-file"></i>
-                        <h3>Total Documents</h3>
-                        <p><?php echo htmlspecialchars($document_stats['total_documents']); ?></p>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-share"></i>
-                        <h3>Shared Documents</h3>
-                        <p><?php echo htmlspecialchars($shared_document_stats['total_shared_documents']); ?></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Recent Activity Logs -->
-            <div class="activity-logs">
-                <h2>Recent Activity</h2>
-                <div class="tables-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Activity</th>
-                                <th>Timestamp</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if ($result_activity->num_rows > 0): ?>
-                                <?php while ($row = $result_activity->fetch_assoc()): ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars($row['action']); ?></td>
-                                        <td style="text-align: center;"><?php echo htmlspecialchars($row['timestamp']); ?></td>
-                                    </tr>
-                                <?php endwhile; ?>
-                            <?php else: ?>
-                                <tr>
-                                    <td colspan="2">No recent activity.</td>
-                                </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
-                </div>
+                <h2>Available Documents</h2>
+                <section class="document-list">
+                    <?php if (!empty($documents)): ?>
+                        <?php foreach ($documents as $doc): ?>
+                            <div class="document-item">
+                                <h3><?php echo htmlspecialchars($doc['title']); ?></h3>
+                                <p class="description"><?php echo htmlspecialchars($doc['description']); ?></p>
+                                <p class="author"><strong>Author:</strong> <?php echo htmlspecialchars($doc['author']); ?></p>
+                                <button class="view-button" onclick="window.location.href='../view_with_download.php?id=<?php echo htmlspecialchars($doc['id']); ?>'">View</button>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>No documents found.</p>
+                    <?php endif; ?>
+                </section>
             </div>
         </div>
     </div>

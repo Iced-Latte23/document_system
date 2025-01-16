@@ -225,3 +225,123 @@ table tr:last-child td:last-child {
         grid-template-columns: 1fr;
     }
 }
+
+/* General styling for the search bar container */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    /* Ensure padding is included in the width */
+    width: 100%;
+    /* Ensure the container takes the full width */
+    max-width: 1200px;
+    /* Set a max-width to prevent excessive stretching */
+    margin: 0 auto;
+    /* Center the container */
+}
+
+/* Styling for the search input container */
+.search-input-container {
+    flex: 1.5;
+    min-width: 200px;
+    /* Set a minimum width to prevent shrinking */
+}
+
+.search-input-container input[type="text"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    /* Ensure padding is included in the width */
+}
+
+.search-input-container input[type="text"]:focus {
+    border-color: #1abc9c;
+}
+
+/* Styling for the filter container */
+.filter-container {
+    flex: 0.5;
+    min-width: 150px;
+}
+
+.filter-container select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    /* Ensure padding is included in the width */
+}
+
+.filter-container select:focus {
+    border-color: #1abc9c;
+}
+
+/* Styling for the date input container */
+.date-input-container {
+    flex: 0.5;
+    min-width: 150px;
+    /* Set a minimum width to prevent shrinking */
+}
+
+.date-input-container input[type="date"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    outline: none;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    /* Ensure padding is included in the width */
+}
+
+.date-input-container input[type="date"]:focus {
+    border-color: #1abc9c;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .search-bar {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .search-input-container,
+    .filter-container,
+    .date-input-container {
+        width: 100%;
+        margin-left: 0;
+        /* Remove left margin in mobile view */
+    }
+}
+
+#clearFilterButton {
+    background-color: #e74c3c;
+    /* Red color */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#clearFilterButton:hover {
+    background-color: #c0392b;
+    /* Darker red on hover */
+}

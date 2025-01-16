@@ -40,7 +40,7 @@
                     <button class="button clear-filters-button" onclick="clearFilters()">
                         Clear Filters
                     </button>
-                    <button class="button add-button" onclick="openAddModal()">
+                    <button class="button add-button" onclick="openUploadModal()">
                         Upload Document
                     </button>
                 </div>
@@ -79,7 +79,7 @@
                                 </td>
                                 <td class="actions">
                                     <a href="../view_with_download.php?id=<?php echo intval($row['id']); ?>" class="btn view">View</a>
-                                    <a href="#" onclick="openEditModal(<?php echo $row['id']; ?>, '<?php echo addslashes($row['title']); ?>',  '<?php echo addslashes($row['author']); ?>', '<?php echo addslashes($row['description']); ?>')" class="btn edit">Edit</a>
+                                    <a href="#" onclick="openEditModal(<?php echo $row['id']; ?>, '<?php echo addslashes($row['title']); ?>', '<?php echo addslashes($row['author']); ?>', '<?php echo addslashes($row['description']); ?>')" class="btn edit">Edit</a>
                                     <a href="#" class="btn delete" onclick="confirmDelete(<?php echo $row['id']; ?>, '<?php echo addslashes($row['title']); ?>')">Delete</a>
                                 </td>
                             </tr>
@@ -117,6 +117,7 @@
                     <label for="document_file">File:</label>
                     <input type="file" id="document_file" name="document_file" required>
                 </div>
+                <div class=""></div>
                 <button type="submit" name="upload_document" class="btn">Upload and Share</button>
             </form>
         </div>
@@ -277,13 +278,11 @@
 
         // Open Edit Document Modal
         function openEditModal(id, title, author, description) {
-            // Set the form values
             document.getElementById('document_id').value = id;
             document.getElementById('edit_title').value = title;
-            document.getElementById('edit_description').value = description;
             document.getElementById('edit_author').value = author;
-
-            // Display the modal
+            document.getElementById('edit_description').value = description;
+            document.getElementById('edit_file').value = '';
             document.getElementById('editDocumentModal').style.display = 'block';
         }
 
@@ -346,9 +345,13 @@
         // Close modals when clicking outside
         window.onclick = function(event) {
             const uploadModal = document.getElementById('uploadModal');
+            const editModal = document.getElementById('editDocumentModal');
             const confirmationModal = document.getElementById('confirmationModal');
             if (event.target === uploadModal) {
                 uploadModal.style.display = 'none';
+            }
+            if (event.target === editModal) {
+                editModal.style.display = 'none';
             }
             if (event.target === confirmationModal) {
                 confirmationModal.style.display = 'none';

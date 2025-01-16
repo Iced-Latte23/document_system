@@ -10,10 +10,10 @@ $settings = $result_settings->fetch_assoc();
 
 
 // Fetch document upload trends over the last 30 days
-$sql_upload_trends = "SELECT DATE(uploaded_at) AS upload_date, COUNT(*) AS upload_count 
-                      FROM tbl_documents 
-                      WHERE uploaded_by = ? AND uploaded_at >= NOW() - INTERVAL 30 DAY 
-                      GROUP BY DATE(uploaded_at) 
+$sql_upload_trends = "SELECT DATE(uploaded_at) AS upload_date, COUNT(*) AS upload_count
+                      FROM tbl_documents
+                      WHERE uploaded_by = ? AND uploaded_at >= NOW() - INTERVAL 30 DAY
+                      GROUP BY DATE(uploaded_at)
                       ORDER BY upload_date ASC";
 $stmt_upload_trends = $conn->prepare($sql_upload_trends);
 $stmt_upload_trends->bind_param("i", $_SESSION['user_id']);
@@ -25,9 +25,9 @@ while ($row = $result_upload_trends->fetch_assoc()) {
 }
 
 // Fetch accessible vs inaccessible documents
-$sql_accessible = "SELECT is_accessible, COUNT(*) AS count 
-                   FROM tbl_documents 
-                   WHERE uploaded_by = ? 
+$sql_accessible = "SELECT is_accessible, COUNT(*) AS count
+                   FROM tbl_documents
+                   WHERE uploaded_by = ?
                    GROUP BY is_accessible";
 $stmt_accessible = $conn->prepare($sql_accessible);
 $stmt_accessible->bind_param("i", $_SESSION['user_id']);
@@ -39,11 +39,27 @@ while ($row = $result_accessible->fetch_assoc()) {
 }
 
 // Fetch activity logs over the last 30 days
-$sql_activity = "SELECT action, details, timestamp 
-                 FROM tbl_activity_log 
+$sql_activity = "SELECT action, details, timestamp
+                 FROM tbl_activity_log
                  WHERE user_id = ? AND timestamp >= NOW() - INTERVAL 30 DAY 
                  ORDER BY timestamp DESC";
 $stmt_activity = $conn->prepare($sql_activity);
 $stmt_activity->bind_param("i", $_SESSION['user_id']);
 $stmt_activity->execute();
 $result_activity = $stmt_activity->get_result();
+
+
+// SQL query to fetch distinct action types from the database
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT DISTINCT action FROM tbl_activity_log WHERE user_id = $user_id"; // Replace `your_table_name` with your actual table name
+$result = $conn->query($sql);
+
+$actionTypes = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $actionTypes[] = $row['action']; // Add each action type to the array
+    }
+}
+
+// Close the database connection
+$conn->close();

@@ -84,6 +84,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_document'])) {
     }
 }
 
+// Fetch documents from the database
+$documents = [];
+$sql = "SELECT id, title, description, author, uploaded_at, file_path FROM tbl_documents";
+$result = $conn->query($sql);
+
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $documents[] = $row;
+    }
+} else {
+    // Log or handle the error if the query fails
+    error_log("Error fetching documents: " . $conn->error);
+}
+
+
 // Function to log activity
 function logActivity($conn, $user_id, $action, $details = '')
 {

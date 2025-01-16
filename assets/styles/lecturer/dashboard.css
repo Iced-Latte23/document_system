@@ -363,3 +363,84 @@ table tr:last-child td:last-child {
     background-color: #e8f5e9;
     color: #2e7d32;
 }
+
+
+/* Document List Styles */
+.document-list {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 100%;
+    /* Ensure the list doesn't overflow */
+    border-radius: 10px;
+}
+
+.document-item {
+    margin-bottom: 15px;
+    /* Reduced margin to remove extra space */
+    padding: 15px;
+    border: 1px solid #d4d2d2;
+    border-radius: 8px;
+    background-color: #fafafa;
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    /* Prevent content from overflowing */
+}
+
+.document-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(32, 153, 55, 0.3);
+}
+
+.document-item h3 {
+    margin: 0 0 10px 0;
+    /* Adjusted margin */
+    font-size: 1.5rem;
+    color: #1abc9c;
+    word-wrap: break-word;
+    /* Ensure long titles wrap */
+}
+
+.document-item .description {
+    margin: 10px 0;
+    /* Reduced margin */
+    color: #555;
+    word-wrap: break-word;
+    /* Ensure long descriptions wrap */
+}
+
+.document-item .author {
+    font-size: 14px;
+    color: #555;
+    margin: 10px 0;
+    /* Reduced margin */
+    font-style: italic;
+    word-wrap: break-word;
+    /* Ensure long author names wrap */
+}
+
+.document-item .author strong {
+    color: #1abc9c;
+    font-weight: 600;
+}
+
+.view-button {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    /* Reduced padding */
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.view-button:hover {
+    background-color: #16a085;
+    transform: translateY(-2px);
+}
+
+.view-button:active {
+    background-color: #149174;
+    transform: translateY(0);
+}
