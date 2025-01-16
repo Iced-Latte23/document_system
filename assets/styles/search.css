@@ -1,0 +1,90 @@
+/* General Styles for Search Bar */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+    background-color: #f4f7f6;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Search Input Container */
+.search-input-container {
+    flex: 2;
+    position: relative;
+}
+
+.search-input-container input {
+    border: 1px solid #ddd;
+    padding: 10px 40px 10px 10px !important;
+    background-image: url('../../icon/search.svg');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.search-input-container input:focus {
+    border: 1px solid #1abc9c;
+}
+
+/* Date Input Container */
+.date-input-container {
+    flex: 1;
+}
+
+.date-input-container input[type="date"] {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    outline: none;
+    width: 100%;
+    text-align: center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.date-input-container input[type="date"]:focus {
+    border-color: #1abc9c;
+    box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.2);
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    padding-left: 30px;
+    gap: 10px;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-container .clear-filters-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.button-container .clear-filters-button:hover {
+    background-color: #c0392b;
+}
+
+.button-container .add-button {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.button-container .add-button:hover {
+    background-color: #27ae60;
+}

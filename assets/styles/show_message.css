@@ -1,0 +1,50 @@
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeInOut 5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.success-message {
+    background-color: #28a745;
+    /* Green for success */
+}
+
+.error-message {
+    background-color: #dc3545;
+    /* Red for error */
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        top: 0;
+    }
+
+    10% {
+        opacity: 1;
+        top: 20px;
+    }
+
+    90% {
+        opacity: 1;
+        top: 20px;
+    }
+
+    100% {
+        opacity: 0;
+        top: 0;
+    }
+}

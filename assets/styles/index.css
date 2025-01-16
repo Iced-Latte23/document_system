@@ -1,0 +1,204 @@
+/* General Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header Styles */
+header {
+    background: #1abc9c;
+    color: white;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Logo Styles */
+header .logo {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Navigation Styles */
+header nav {
+    display: flex;
+    gap: 15px;
+    margin-left: auto;
+}
+
+/* Common Button Styles */
+header nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Sign Up Button Styles */
+header nav a.signup-btn {
+    background-color: #1abc9c;
+    color: white;
+    border: 2px solid #16a085;
+}
+
+header nav a.signup-btn:hover {
+    background-color: #16a085;
+    border-color: #1abc9c;
+}
+
+/* Login Button Styles */
+header nav a.login-btn {
+    background-color: #48c9b0;
+    color: white;
+}
+
+header nav a.login-btn:hover {
+    background-color: #1abc9c;
+}
+
+/* Welcome Section Styles */
+.welcome-section {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.welcome-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.welcome-section p {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+/* Document List Styles */
+.document-list {
+    padding: 20px;
+    background-color: #ffffff;
+    margin: 20px auto;
+    width: 85%;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.document-list h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.document-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+}
+
+.document-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.document-item h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #1abc9c;
+}
+
+.document-item p {
+    margin: 10px 0;
+    color: #555;
+    word-wrap: break-word;
+}
+
+.document-item a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.document-item a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    margin-top: auto;
+    /* Push the footer to the bottom */
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    header .logo {
+        position: static;
+        transform: none;
+        margin-bottom: 10px;
+    }
+
+    header nav {
+        margin-left: 0;
+        gap: 10px;
+    }
+
+    header nav a {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+
+    .welcome-section h1 {
+        font-size: 2rem;
+    }
+
+    .welcome-section p {
+        font-size: 1rem;
+    }
+
+    .document-list {
+        padding: 15px;
+        margin: 15px;
+    }
+
+    .document-item h3 {
+        font-size: 1.3rem;
+    }
+}

@@ -1,0 +1,189 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+.dashboard-container {
+    display: flex;
+}
+
+/* Main Content */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.main-content h3 {
+    margin: 0 12px 20px 15px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3e50;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #1abc9c;
+}
+
+/* Metrics Row */
+.metrics-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+/* Paragraph Styles Inside Metrics Row */
+.main-content .metrics-row p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    line-height: 1.6;
+    color: #1abc9c;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Card Styles */
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Responsive Design for Metrics Row */
+@media (max-width: 768px) {
+    .metrics-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .card {
+        margin: 0;
+    }
+}
+
+/* Charts Container */
+.charts-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    gap: 20px;
+    height: 300px;
+}
+
+/* Chart Container */
+.chart-container {
+    background-color: white;
+    padding: 25px;
+    padding-bottom: 50px;
+    border-radius: 10px;
+    flex: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+}
+
+/* Chart Canvas */
+.chart-container canvas {
+    max-width: 100%;
+    height: auto !important;
+    width: 100% !important;
+}
+
+/* Responsive Design for Charts Container */
+@media (max-width: 768px) {
+    .charts-container {
+        flex-direction: column;
+        height: auto;
+        gap: 10px;
+    }
+
+    .chart-container {
+        margin: 0;
+        height: 250px;
+    }
+}
+
+.recent-activity {
+    margin-top: 45px;
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.recent-activity h3 {
+    margin: 0 12px 20px 15px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3e50;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #1abc9c;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #1abc9c;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+
+/* Ensure the first and last rows have rounded corners */
+table tr:first-child th:first-child {
+    border-top-left-radius: 12px;
+}
+
+table tr:first-child th:last-child {
+    border-top-right-radius: 12px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}

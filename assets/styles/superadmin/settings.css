@@ -1,0 +1,322 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+.dashboard-container {
+    display: flex;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin: 20px;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Settings Sections */
+.settings-section {
+    margin-bottom: 30px;
+}
+
+.settings-section h2 {
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid #1abc9c;
+    padding-bottom: 10px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #1abc9c;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Maintenance Mode Checkbox Alignment */
+.form-group.maintenance-mode {
+    display: flex;
+    /* Align label and checkbox in one row */
+    align-items: center;
+    /* Vertically center items */
+    gap: 10px;
+    /* Space between label and checkbox */
+}
+
+.form-group.maintenance-mode label {
+    margin: 0;
+    /* Remove margin for inline alignment */
+}
+
+.form-group.maintenance-mode input[type="checkbox"] {
+    appearance: none;
+    /* Remove default checkbox styling */
+    width: 18px;
+    height: 18px;
+    border: 2px solid #1abc9c;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.form-group.maintenance-mode input[type="checkbox"]:checked {
+    background-color: #1abc9c;
+}
+
+.form-group.maintenance-mode input[type="checkbox"]:checked::after {
+    content: "✔";
+    /* Checkmark symbol */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+}
+
+/* Button Styles */
+.btn {
+    background-color: #1abc9c;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Backup and Restore Section */
+.backup-restore {
+    margin-bottom: 30px;
+}
+
+.backup-restore h2 {
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid #1abc9c;
+    padding-bottom: 10px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.backup-restore form {
+    margin-bottom: 20px;
+}
+
+.backup-restore input[type="file"] {
+    margin-bottom: 10px;
+}
+
+/* System Logs Section */
+.system-logs {
+    margin-bottom: 30px;
+}
+
+.system-logs h2 {
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid #1abc9c;
+    padding-bottom: 10px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.system-logs table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.system-logs th,
+.system-logs td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.system-logs th {
+    background-color: #1abc9c;
+    color: white;
+    font-weight: 600;
+}
+
+.system-logs tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin: 10px;
+        padding: 15px;
+    }
+}
+
+.error {
+    color: #721c24;
+    /* Dark red text color */
+    background-color: #f8d7da;
+    /* Light red background */
+    border: 1px solid #f5c6cb;
+    /* Slightly darker red border */
+    padding: 12px;
+    /* Padding for better spacing */
+    border-radius: 4px;
+    /* Rounded corners */
+    margin-bottom: 20px;
+    /* Space below the error message */
+    font-size: 16px;
+    /* Consistent font size */
+    font-weight: 500;
+    /* Slightly bold text */
+    display: flex;
+    /* Align icon and text */
+    align-items: center;
+    /* Center items vertically */
+    gap: 10px;
+    /* Space between icon and text */
+}
+
+.error i {
+    font-size: 18px;
+    /* Slightly larger icon */
+    color: #dc3545;
+    /* Red icon color */
+}
+
+.success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.success i {
+    font-size: 18px;
+    color: #28a745;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    border-radius: 12px;
+    /* Rounded corners for the table */
+    overflow: hidden;
+    /* Ensures the corners are rounded properly */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Optional: Adds a subtle shadow */
+}
+
+th,
+td {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #1abc9c;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* tr:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+} */
+
+td:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+
+/* Ensure the first and last rows have rounded corners */
+table tr:first-child th:first-child {
+    border-top-left-radius: 12px;
+    /* Rounded top-left corner */
+}
+
+table tr:first-child th:last-child {
+    border-top-right-radius: 12px;
+    /* Rounded top-right corner */
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+    /* Rounded bottom-left corner */
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+    /* Rounded bottom-right corner */
+}

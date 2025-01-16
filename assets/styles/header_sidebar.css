@@ -1,0 +1,78 @@
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+header .logo h1 {
+    margin: 0;
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.header-right {
+    position: absolute;
+    top: 32px;
+    right: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.profile {
+    position: relative;
+    cursor: pointer;
+}
+
+.greeting {
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+/* Left Navigation Bar */
+.sidebar {
+    width: 210px;
+    background-color: #34495e;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    height: auto;
+    min-height: 100vh;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar a i {
+    margin-right: 10px;
+}
+
+.sidebar a:hover {
+    background-color: #2c3e50;
+}
+
+.sidebar a.active {
+    background-color: #1abc9c;
+    color: white;
+}
+
+.sidebar hr {
+    border: 0;
+    height: 1px;
+    background-color: #2c3e50;
+    margin: 20px 0;
+}
+
+.sidebar .signout-button:hover {
+    background-color: #e60000;
+    color: white;
+}

@@ -1,0 +1,788 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+.dashboard-container {
+    display: flex;
+}
+
+/* General Button Styles */
+.button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+    color: white;
+}
+
+/* Edit Button (Blue) */
+.edit-button {
+    background-color: #007bff;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+/* Add Button (Green) */
+.add-button {
+    background-color: #28a745;
+}
+
+.add-button:hover {
+    background-color: #218838;
+}
+
+/* Delete Button (Red) */
+.delete-button {
+    background-color: #dc3545;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+/* Cancel Button */
+.cancel-button {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+}
+
+.cancel-button:hover {
+    background-color: #5a6268;
+}
+
+/* Sign Out Button */
+.sidebar .signout-button:hover {
+    background-color: #e60000;
+    color: white;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin: 20px;
+    width: 90%;
+    max-width: 1200px;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.main-content h3 {
+    margin: 0 3px 20px 15px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3e50;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #1abc9c;
+}
+
+/* General Styles for Search Bar */
+.search-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 10px;
+    border-radius: 10px;
+}
+
+/* Search Input Container */
+.search-input-container {
+    width: 100%;
+    position: relative;
+}
+
+.search-input-container input {
+    border: 1px solid black;
+    padding: 10px 40px 10px 10px !important;
+    background-image: url('../../icon/search.svg');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.search-input-container input:focus {
+    border: 1px solid #1abc9c;
+}
+
+
+/* Filters, Date Range, and Buttons Row */
+.filters-and-buttons-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    gap: 10px;
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    background-color: #f4f7f6;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 150px;
+}
+
+.filter-container select {
+    border: none;
+    background-color: #f4f7f6;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-container select:focus {
+    border-color: #1abc9c;
+    box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.2);
+}
+
+/* Date Range Container */
+.date-range-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex: 1;
+}
+
+.date-range-container input[type="text"] {
+    border: 1px solid #ddd;
+    background-color: #f4f7f6;
+    border-radius: 8px;
+    padding: 12px 8px;
+    font-size: 14px;
+    outline: none;
+    width: 100%;
+    text-align: center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.date-range-container input[type="text"]:focus {
+    border-color: #1abc9c;
+    box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.2);
+    background-color: #f4f7f6;
+}
+
+.date-range-container input[type="text"]::placeholder {
+    color: #000;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    gap: 10px;
+    flex: 1.5;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    justify-content: center;
+}
+
+.clear-filters-button {
+    padding: 12px 8px;
+    background: #e55f5f;
+    /* Solid red color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.clear-filters-button:hover {
+    background: #c33641;
+    /* Brighter red on hover */
+}
+
+.add-button {
+    background-color: #1abc9c;
+    color: white;
+}
+
+.add-button:hover {
+    background-color: #16a085;
+}
+
+.search-bar select,
+.search-bar input[type="date"] {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    min-width: 120px;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar select:focus,
+.search-bar input[type="date"]:focus {
+    border-color: #1abc9c;
+    outline: none;
+}
+
+#filterStartDate,
+#filterEndDate {
+    display: none;
+}
+
+/* Flatpickr Container */
+.flatpickr-calendar {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid #ddd;
+}
+
+/* Flatpickr Input Field */
+.flatpickr-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    width: 100%;
+    background-color: #f4f7f6;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.flatpickr-input:focus {
+    border-color: #1abc9c;
+}
+
+/* Flatpickr Calendar Header */
+.flatpickr-months {
+    background-color: #1abc9c;
+    border-radius: 8px 8px 0 0;
+    padding: 10px;
+}
+
+.flatpickr-month {
+    color: white;
+}
+
+.flatpickr-current-month {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.flatpickr-prev-month,
+.flatpickr-next-month {
+    color: white;
+    fill: white;
+}
+
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover {
+    color: #f4f7f6;
+    fill: #f4f7f6;
+}
+
+/* Flatpickr Weekdays */
+.flatpickr-weekdays {
+    background-color: #1abc9c;
+    color: white;
+    padding: 8px 0;
+}
+
+.flatpickr-weekday {
+    font-weight: 500;
+}
+
+/* Flatpickr Days */
+.flatpickr-day {
+    color: #333;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.flatpickr-day:hover {
+    background-color: #1abc9c;
+    color: white;
+}
+
+.flatpickr-day.selected {
+    background-color: #1abc9c;
+    color: white;
+    border-color: #1abc9c;
+}
+
+.flatpickr-day.inRange {
+    background-color: #e0f2f1;
+    color: #333;
+    border-color: #e0f2f1;
+}
+
+.flatpickr-day.today {
+    border: 1px solid #1abc9c;
+    color: #1abc9c;
+}
+
+.flatpickr-day.today:hover {
+    background-color: #1abc9c;
+    color: white;
+}
+
+/* Flatpickr Time Input */
+.flatpickr-time {
+    border-top: 1px solid #ddd;
+    padding: 10px;
+}
+
+.flatpickr-time input {
+    font-size: 14px;
+    color: #333;
+}
+
+.flatpickr-time .numInputWrapper span.arrowUp:after {
+    border-bottom-color: #1abc9c;
+}
+
+.flatpickr-time .numInputWrapper span.arrowDown:after {
+    border-top-color: #1abc9c;
+}
+
+/* Flatpickr Clear Button */
+.flatpickr-clear {
+    color: #dc3545;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.flatpickr-clear:hover {
+    background-color: #ffebee;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #1abc9c;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tr-data:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+
+/* Ensure the first and last rows have rounded corners */
+table tr:first-child th:first-child {
+    border-top-left-radius: 12px;
+}
+
+table tr:first-child th:last-child {
+    border-top-right-radius: 12px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    gap: 10px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 450px;
+    max-width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #1abc9c;
+    outline: none;
+}
+
+.modal-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: right;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .container {
+        margin-left: 20px;
+        width: 95%;
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
+
+    .search-bar input[type="text"],
+    .search-bar select,
+    .search-bar input[type="date"] {
+        width: 100%;
+        min-width: unset;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    th,
+    td {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.3rem;
+    }
+
+    nav a {
+        margin: 0 5px;
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    th,
+    td {
+        padding: 8px;
+    }
+
+    .modal-content {
+        padding: 15px;
+    }
+
+    .modal-header {
+        font-size: 20px;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 10px;
+    }
+}
+
+/* Error Message Container */
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ef9a9a;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Error Icon */
+.error-message i {
+    color: #c62828;
+    font-size: 18px;
+}
+
+/* Close Button for Error Message */
+.error-message .close-button {
+    margin-left: auto;
+    cursor: pointer;
+    color: #c62828;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.error-message .close-button:hover {
+    color: #b71c1c;
+}
+
+/* Success Message Container */
+.success-message {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #a5d6a7;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Success Icon */
+.success-message i {
+    color: #2e7d32;
+    font-size: 18px;
+}
+
+/* Close Button for Success Message */
+.success-message .close-button {
+    margin-left: auto;
+    cursor: pointer;
+    color: #2e7d32;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.success-message .close-button:hover {
+    color: #1b5e20;
+}
+
+.no-actions {
+    color: #888;
+    font-style: italic;
+}
+
+.confirm-modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 450px;
+    max-width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+}
+
+.confirm-modal-content .modal-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.btn-delete {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #ff1a1a;
+}
+
+.btn-cancel {
+    background-color: #ccc;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cancel:hover {
+    background-color: #bbb;
+}
+
+/* Custom Alert Styles */
+.custom-alert {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.custom-alert-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.custom-alert-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.custom-alert-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.custom-alert-btn:hover {
+    background-color: #0056b3;
+}

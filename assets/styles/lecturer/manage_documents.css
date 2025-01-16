@@ -1,0 +1,479 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+.dashboard-container {
+    display: flex;
+}
+
+/* Main Content Styles */
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Search and Upload Container */
+.search-upload-container {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    flex: 1;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.upload-button {
+    background-color: #1abc9c;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.upload-button:hover {
+    background-color: #16a085;
+}
+
+/* Document Table Styles */
+.document-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.document-table th,
+.document-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.document-table th {
+    background-color: #1abc9c;
+    color: #fff;
+}
+
+.document-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.document-table .actions {
+    display: flex;
+    gap: 10px;
+}
+
+.document-table .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.document-table .btn.delete {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.document-table .btn.delete:hover {
+    background-color: #c0392b;
+}
+
+td.description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+/* General button styles */
+.btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+/* View button (green) */
+.btn.view {
+    background-color: #28a745;
+    /* Green */
+}
+
+.btn.view:hover {
+    background-color: #218838;
+    /* Darker green */
+}
+
+/* Edit button (blue) */
+.btn.edit {
+    background-color: #007bff;
+    /* Blue */
+}
+
+.btn.edit:hover {
+    background-color: #0056b3;
+    /* Darker blue */
+}
+
+/* Delete button (red) */
+.btn.delete {
+    background-color: #dc3545;
+    /* Red */
+}
+
+.btn.delete:hover {
+    background-color: #c82333;
+    /* Darker red */
+}
+
+/* Action buttons container */
+.actions {
+    display: flex;
+    gap: 8px;
+    padding-bottom: 10px;
+}
+
+/* Switch Styling */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #1abc9c;
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.document-table th {
+    background-color: #1abc9c;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.document-table .upload-date,
+.document-table .accessible {
+    text-align: center;
+}
+
+.document-table .actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tr-data:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+
+/* Ensure the first and last rows have rounded corners */
+table tr:first-child th:first-child {
+    border-top-left-radius: 12px;
+}
+
+table tr:first-child th:last-child {
+    border-top-right-radius: 12px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    padding-top: 85px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 450px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: 0 auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+    position: relative;
+}
+
+.modal-content .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-content .close:hover {
+    color: #333;
+    /* Darker color on hover */
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #2c3e50;
+    /* Darker heading color */
+    margin-bottom: 20px;
+}
+
+.modal-content .form-group {
+    margin-bottom: 20px;
+}
+
+.modal-content .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+    /* Slightly darker label color */
+}
+
+.modal-content .form-group input,
+.modal-content .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-content .form-group input:focus,
+.modal-content .form-group textarea:focus {
+    border-color: #1abc9c;
+    /* Highlight border on focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
+    /* Add a glow effect */
+}
+
+.modal-content .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.modal-content .btn-update {
+    background-color: #1abc9c;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-content .btn-update:hover {
+    background-color: #16a085;
+    transform: translateY(-2px);
+}
+
+.modal-content .btn-delete {
+    background-color: #bc1a1a;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-content .btn-delete:hover {
+    background-color: #a01616;
+    transform: translateY(-2px);
+}
+
+.modal-content .btn-cancel {
+    background-color: #c9c9c9;
+    color: #000000;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-content .btn-cancel:hover {
+    background-color: #8a8b8b;
+    transform: translateY(-2px);
+}
+
+.modal-content .btn:active {
+    transform: translateY(0);
+}
+
+.modal-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: right;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .document-table .actions {
+        flex-direction: column;
+    }
+
+    .search-upload-container {
+        flex-direction: column;
+    }
+
+    .upload-button {
+        width: 100%;
+        justify-content: center;
+    }
+}

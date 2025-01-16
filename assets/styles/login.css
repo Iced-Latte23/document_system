@@ -1,0 +1,71 @@
+/* Inline CSS for Login Page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #1abc9c;
+}
+
+.login-container p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.login-form input:focus {
+    border-color: #1abc9c;
+    outline: none;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #15967D;
+}
+
+.login-container a {
+    color: #1A9CBC;
+    text-decoration: none;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}

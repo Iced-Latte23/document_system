@@ -1,0 +1,150 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    background-color: #fff;
+    margin: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    /* Prevent content from overflowing */
+}
+
+/* Search Bar */
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-bar input:focus {
+    border-color: #1abc9c;
+}
+
+/* Document List Styles */
+.document-list {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 100%;
+    /* Ensure the list doesn't overflow */
+    border-radius: 10px;
+}
+
+.document-item {
+    margin-bottom: 15px;
+    /* Reduced margin to remove extra space */
+    padding: 15px;
+    border: 1px solid #d4d2d2;
+    border-radius: 8px;
+    background-color: #fafafa;
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    /* Prevent content from overflowing */
+}
+
+.document-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(32, 153, 55, 0.3);
+}
+
+.document-item h3 {
+    margin: 0 0 10px 0;
+    /* Adjusted margin */
+    font-size: 1.5rem;
+    color: #1abc9c;
+    word-wrap: break-word;
+    /* Ensure long titles wrap */
+}
+
+.document-item .description {
+    margin: 10px 0;
+    /* Reduced margin */
+    color: #555;
+    word-wrap: break-word;
+    /* Ensure long descriptions wrap */
+}
+
+.document-item .author {
+    font-size: 14px;
+    color: #555;
+    margin: 10px 0;
+    /* Reduced margin */
+    font-style: italic;
+    word-wrap: break-word;
+    /* Ensure long author names wrap */
+}
+
+.document-item .author strong {
+    color: #1abc9c;
+    font-weight: 600;
+}
+
+.view-button {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    /* Reduced padding */
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.view-button:hover {
+    background-color: #16a085;
+    transform: translateY(-2px);
+}
+
+.view-button:active {
+    background-color: #149174;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .main-content {
+        margin: 15px;
+        padding: 15px;
+    }
+
+    .document-list {
+        padding: 10px;
+    }
+
+    .document-item {
+        padding: 10px;
+    }
+
+    .search-bar input {
+        font-size: 14px;
+    }
+}
