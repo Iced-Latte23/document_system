@@ -471,6 +471,22 @@
             }
         }
 
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const uploadModal = document.getElementById('addDocumentModal');
+            const editModal = document.getElementById('editDocumentModal');
+            const confirmationModal = document.getElementById('confirmationModal');
+            if (event.target === uploadModal) {
+                uploadModal.style.display = 'none';
+            }
+            if (event.target === editModal) {
+                editModal.style.display = 'none';
+            }
+            if (event.target === confirmationModal) {
+                confirmationModal.style.display = 'none';
+            }
+        };
+
         // Hide messages after 3 seconds
         setTimeout(() => {
             const successMessage = document.getElementById('successMessage');

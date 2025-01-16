@@ -420,6 +420,22 @@
         function closeEditModal() {
             document.getElementById('editUserModal').style.display = 'none';
         }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const uploadModal = document.getElementById('addUserModal');
+            const editModal = document.getElementById('editUserModal');
+            const confirmationModal = document.getElementById('confirmationModal');
+            if (event.target === uploadModal) {
+                uploadModal.style.display = 'none';
+            }
+            if (event.target === editModal) {
+                editModal.style.display = 'none';
+            }
+            if (event.target === confirmationModal) {
+                confirmationModal.style.display = 'none';
+            }
+        };
     </script>
 </body>
 
