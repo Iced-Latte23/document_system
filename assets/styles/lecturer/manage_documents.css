@@ -164,8 +164,8 @@ td.description {
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 50px;
+    height: 24px;
 }
 
 .switch input {
@@ -189,8 +189,8 @@ td.description {
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
+    height: 16px;
+    width: 16px;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -204,6 +204,12 @@ input:checked+.slider {
 
 input:checked+.slider:before {
     transform: translateX(26px);
+}
+
+.document-table .accessible {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Table Styles */
@@ -275,7 +281,6 @@ table tr:last-child td:last-child {
 .modal {
     display: none;
     position: fixed;
-    padding-top: 85px;
     top: 0;
     left: 0;
     width: 100%;
@@ -287,147 +292,174 @@ table tr:last-child td:last-child {
     animation: fadeIn 0.3s ease;
 }
 
-.modal.active {
-    display: flex;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
-/* Modal Content */
 .modal-content {
     background-color: white;
     padding: 30px;
     border-radius: 12px;
-    width: 450px;
+    width: 600px;
+    /* Adjusted width */
     max-width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    margin: 0 auto;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     animation: slideIn 0.3s ease;
-    position: relative;
 }
 
-.modal-content .close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
     font-size: 24px;
-    font-weight: bold;
-    color: #888;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.modal-content .close:hover {
-    color: #333;
-    /* Darker color on hover */
-}
-
-.modal-content h2 {
-    margin-top: 0;
-    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
     color: #2c3e50;
-    /* Darker heading color */
-    margin-bottom: 20px;
+    text-align: center;
 }
 
-.modal-content .form-group {
-    margin-bottom: 20px;
+.form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
-.modal-content .form-group label {
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+.form-group label {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
     color: #555;
-    /* Slightly darker label color */
 }
 
-.modal-content .form-group input,
-.modal-content .form-group textarea {
+.form-group input,
+.form-group select {
     width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
+    padding: 12px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 14px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
 }
 
-.modal-content .form-group input:focus,
-.modal-content .form-group textarea:focus {
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
     border-color: #1abc9c;
-    /* Highlight border on focus */
     outline: none;
-    box-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
-    /* Add a glow effect */
-}
-
-.modal-content .form-group textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-.modal-content .btn-update {
-    background-color: #1abc9c;
-    color: #fff;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.modal-content .btn-update:hover {
-    background-color: #16a085;
-    transform: translateY(-2px);
-}
-
-.modal-content .btn-delete {
-    background-color: #bc1a1a;
-    color: #fff;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.modal-content .btn-delete:hover {
-    background-color: #a01616;
-    transform: translateY(-2px);
-}
-
-.modal-content .btn-cancel {
-    background-color: #c9c9c9;
-    color: #000000;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.modal-content .btn-cancel:hover {
-    background-color: #8a8b8b;
-    transform: translateY(-2px);
-}
-
-.modal-content .btn:active {
-    transform: translateY(0);
 }
 
 .modal-footer {
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
     gap: 10px;
-    text-align: right;
+    margin-top: 20px;
 }
+
+.cancel-button {
+    background-color: #b6b5b5;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+.description .title-a {
+    color: black;
+    text-decoration: none;
+}
+
+.title-a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.cancel-button:hover {
+    background-color: #7c7b7b;
+    color: white;
+}
+
+/* Add Button (Green) */
+.add-button {
+    background-color: #28a745;
+    padding: 10px 65px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+    color: white;
+    box-sizing: border-box;
+}
+
+.add-button:hover {
+    background-color: #218838;
+}
+
+
+.close-button {
+    background-color: #b6b5b5;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+    box-sizing: border-box;
+    justify-self: center;
+}
+
+.close-button:hover {
+    background-color: #7c7b7b;
+    color: white;
+}
+
 
 /* Animations */
 @keyframes fadeIn {

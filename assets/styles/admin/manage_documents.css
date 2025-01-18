@@ -551,8 +551,8 @@ table tr:last-child td:last-child {
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 50px;
+    height: 24px;
 }
 
 .switch input {
@@ -576,8 +576,8 @@ table tr:last-child td:last-child {
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
+    height: 16px;
+    width: 16px;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -591,6 +591,12 @@ input:checked+.slider {
 
 input:checked+.slider:before {
     transform: translateX(26px);
+}
+
+.document-table .accessible {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Enhancements for better readability and spacing */
@@ -661,7 +667,8 @@ table {
     background-color: white;
     padding: 30px;
     border-radius: 12px;
-    width: 450px;
+    width: 600px;
+    /* Adjusted width */
     max-width: 90%;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     animation: slideIn 0.3s ease;
@@ -687,8 +694,25 @@ table {
     text-align: center;
 }
 
+.form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+}
+
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
 .form-group label {
@@ -698,9 +722,17 @@ table {
     color: #555;
 }
 
-
 .form-group input,
-.form-group select,
+.form-group select{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
 .form-group textarea {
     width: 100%;
     padding: 12px;
@@ -708,6 +740,7 @@ table {
     border-radius: 8px;
     font-size: 14px;
     transition: border-color 0.3s ease;
+    height: 100%;
     box-sizing: border-box;
 }
 
@@ -720,9 +753,37 @@ table {
 
 .modal-footer {
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
     gap: 10px;
-    text-align: right;
+    margin-top: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-button {
+    background-color: #1abc9c;
+    color: white;
+}
+
+.add-button:hover {
+    background-color: #16a085;
+}
+
+.cancel-button {
+    background-color: #b6b5b5;
+    color: black;
+}
+
+.cancel-button:hover {
+    background-color: #7c7b7b;
+    color: white;
 }
 
 .confirm-footer {

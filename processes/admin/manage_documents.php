@@ -96,6 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_document'])) {
     $title = trim($_POST['title']);
     $description = trim($_POST['description']);
     $author = trim($_POST['author']);
+    $public_date = trim($_POST['public_date']);
 
     // Handle file upload
     if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
@@ -105,9 +106,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_document'])) {
         // Validate file type and size
         if (in_array($file_type, $fileTypes) && $_FILES['file']['size'] <= $max_size) {
             // Insert document metadata into the database first (without file path)
-            $sql = "INSERT INTO tbl_documents (title, description, author, uploaded_by, file_type) VALUES (?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO tbl_documents (title, description, author, public_date,uploaded_by, file_type) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssis", $title, $description, $author, $uploaded_by, $file_type);
+            $stmt->bind_param("ssssis", $title, $description, $author, $uploaded_by, $file_type);
 
             if ($stmt->execute()) {
                 // Get the auto-generated document ID
@@ -169,6 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_document'])) {
     $title = trim($_POST['title']);
     $author = trim($_POST['author']);
     $description = trim($_POST['description']);
+    $public_date = trim($_POST['public_date']);
 
     // Fetch the current file path and type from the database
     $sql = "SELECT file_path, file_type, uploaded_by FROM tbl_documents WHERE id = ?";
@@ -223,12 +225,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_document'])) {
 
         // Update document details in the database
         $updated_at = date('Y-m-d H:i:s'); // Current timestamp
-        $sql = "UPDATE tbl_documents SET title = ?, description = ?, author = ?, file_path = ?, file_type = ?, updated_at = ? WHERE id = ?";
+        $sql = "UPDATE tbl_documents SET title = ?, description = ?, author = ?, public_date = ?, file_path = ?, file_type = ?, updated_at = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
         if (!$stmt) {
             die("Error preparing update statement: " . $conn->error);
         }
-        $stmt->bind_param("ssssssi", $title, $description, $author, $new_file_path, $new_file_type, $updated_at, $document_id);
+        $stmt->bind_param("sssssssi", $title, $description, $author, $public_date, $new_file_path, $new_file_type, $updated_at, $document_id);
 
         if ($stmt->execute()) {
             $success_message = "Document updated successfully!";

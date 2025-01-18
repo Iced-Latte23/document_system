@@ -2,7 +2,7 @@
 // Set the default timezone to Cambodia (Phnom Penh)
 date_default_timezone_set('Asia/Phnom_Penh');
 
-// Database connection
+//? Database connection
 require __DIR__ . '/../db_connect.php';
 require __DIR__ . '/../session_check.php';
 
@@ -11,7 +11,7 @@ $title = $description = $file_path = $uploaded_by = '';
 $success_message = '';
 $error_message = '';
 
-// Function to log activity
+//? Function to log activity
 function logActivity($conn, $user_id, $action, $details = '')
 {
     $sql = "INSERT INTO tbl_activity_log (user_id, action, details, timestamp) VALUES (?, ?, ?, NOW())";
@@ -21,7 +21,7 @@ function logActivity($conn, $user_id, $action, $details = '')
     $stmt->close();
 }
 
-// Get the logged-in user's ID and role from the session
+//? Get the logged-in user's ID and role from the session
 if (isset($_SESSION['user_id'])) {
     $uploaded_by = $_SESSION['user_id']; // Automatically get the user ID
     $current_user_role = $_SESSION['role']; // Get the user's role
@@ -31,7 +31,7 @@ if (isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Fetch system settings from the database
+//? Fetch system settings from the database
 $sql_settings = "SELECT * FROM tbl_system_settings WHERE id = 1";
 $result_settings = $conn->query($sql_settings);
 
@@ -44,7 +44,7 @@ if ($result_settings && $result_settings->num_rows > 0) {
     error_log("No system settings found for id = 1.");
 }
 
-// Handle accessibility toggle
+//? Handle accessibility toggle
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['toggle_accessibility'])) {
     $document_id = $_POST['document_id'];
     $is_accessible = (int)$_POST['is_accessible']; // Ensure it's an integer
@@ -91,11 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['toggle_accessibility'
     exit();
 }
 
-// Handle form submission to add a new document
+//? Handle form submission to add a new document
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_document'])) {
     $title = trim($_POST['title']);
     $description = trim($_POST['description']);
     $author = trim($_POST['author']);
+    $public_date = trim($_POST['public_date']);
 
     // Handle file upload
     if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
@@ -105,9 +106,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_document'])) {
         // Validate file type and size
         if (in_array($file_type, $fileTypes) && $_FILES['file']['size'] <= $max_size) {
             // Insert document metadata into the database first (without file path)
-            $sql = "INSERT INTO tbl_documents (title, description, author, uploaded_by, file_type) VALUES (?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO tbl_documents (title, description, author, public_date, uploaded_by, file_type) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssis", $title, $description, $author, $uploaded_by, $file_type);
+            $stmt->bind_param("ssssis", $title, $description, $author, $public_date, $uploaded_by, $file_type);
 
             if ($stmt->execute()) {
                 // Get the auto-generated document ID
@@ -163,12 +164,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_document'])) {
         $error_message = "No file uploaded or file upload error!";
     }
 }
-// Handle form submission to update document details
+
+//? Handle form submission to update document details
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_document'])) {
     $document_id = $_POST['document_id'];
     $title = trim($_POST['title']);
     $author = trim($_POST['author']);
     $description = trim($_POST['description']);
+    $public_date = trim($_POST['public_date']);
 
     // Fetch the current file path and type from the database
     $sql = "SELECT file_path, file_type, uploaded_by FROM tbl_documents WHERE id = ?";
@@ -221,14 +224,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_document'])) {
             }
         }
 
-        // Update document details in the database
+
+
+        //? Update document details in the database
         $updated_at = date('Y-m-d H:i:s'); // Current timestamp
-        $sql = "UPDATE tbl_documents SET title = ?, description = ?, author = ?, file_path = ?, file_type = ?, updated_at = ? WHERE id = ?";
+        $sql = "UPDATE tbl_documents SET title = ?, description = ?, author = ?, public_date = ?, file_path = ?, file_type = ?, updated_at = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
         if (!$stmt) {
             die("Error preparing update statement: " . $conn->error);
         }
-        $stmt->bind_param("ssssssi", $title, $description, $author, $new_file_path, $new_file_type, $updated_at, $document_id);
+        $stmt->bind_param("sssssssi", $title, $description, $author, $public_date, $new_file_path, $new_file_type, $updated_at, $document_id);
 
         if ($stmt->execute()) {
             $success_message = "Document updated successfully!";
@@ -242,7 +247,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_document'])) {
         $error_message = "You do not have permission to edit this document.";
     }
 }
-// Handle document deletion
+
+//? Handle document deletion
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_document'])) {
     $document_id = $_POST['document_id'];
 

@@ -89,6 +89,7 @@
                         <th>Title</th>
                         <th>Description</th>
                         <th>Author</th>
+                        <th>Public Date</th>
                         <th>File Path</th>
                         <th>File Type</th>
                         <th>Uploaded By</th>
@@ -106,10 +107,9 @@
                                 <td class="description"><?php echo htmlspecialchars($row["title"]); ?></td>
                                 <td class="description"><?php echo htmlspecialchars($row["description"]); ?></td>
                                 <td class="description"><?php echo htmlspecialchars($row["author"]); ?></td>
+                                <td class="description"><?php echo htmlspecialchars($row["public_date"]); ?></td>
                                 <td>
-                                    <!-- <a href="../../view_page.php?id=<? echo urlencode(basename($row["file_path"])); ?>" target="_blank">View File</a> -->
                                     <a href="../view_with_download.php?id=<?php echo intval($row['id']); ?>" class="btn view" target="_blank">View</a>
-
                                 </td>
                                 <td><?php echo htmlspecialchars($row["file_type"]); ?></td>
                                 <td><?php echo htmlspecialchars($row["uploaded_by_name"]); ?></td>
@@ -124,11 +124,11 @@
                                         </label>
                                     </form>
                                 </td>
-                                <td><?php echo htmlspecialchars($row["uploaded_at"]); ?></td>
-                                <td><?php echo htmlspecialchars($row["updated_at"]); ?></td>
+                                <td><?php echo (new DateTime($row["uploaded_at"]))->format('Y-m-d'); ?></td>
+                                <td><?php echo (new DateTime($row["updated_at"]))->format('Y-m-d'); ?></td>
                                 <td class="actions">
-                                    <button class="button detail-button" onclick="openDetailModal(<?php echo $row['id']; ?>, '<?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['description'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['file_path'], ENT_QUOTES, 'UTF-8'); ?>')">Detail</button>
-                                    <button class="button edit-button" onclick="openEditModal(<?php echo $row['id']; ?>, '<?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['description'], ENT_QUOTES, 'UTF-8'); ?>')">Edit</button>
+                                    <button class="button detail-button" onclick="openDetailModal(<?php echo $row['id']; ?>, '<?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['description'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['file_path'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['public_date'], ENT_QUOTES, 'UTF-8'); ?>')">Detail</button>
+                                    <button class="button edit-button" onclick="openEditModal(<?php echo $row['id']; ?>, '<?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['description'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['public_date'], ENT_QUOTES, 'UTF-8'); ?>')">Edit</button>
                                     <button class="button delete-button" onclick="confirmDelete(<?php echo $row['id']; ?>, '<?php echo addslashes($row['title']); ?>')">Delete</button>
                                 </td>
                             </tr>
@@ -148,25 +148,37 @@
         <div class="modal-content">
             <div class="modal-header">Add Document</div>
             <form id="addDocumentForm" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" required>
-                </div>
-                <div class="form-group">
-                    <label for="author">Author:</label>
-                    <input type="text" id="author" name="author" required>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea id="description" name="description" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="file">File:</label>
-                    <input type="file" id="file" name="file" required>
+                <div class="form-container">
+                    <!-- Left Column -->
+                    <div class="left-column">
+                        <div class="form-group">
+                            <label for="title">Title:</label>
+                            <input type="text" id="title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="author">Author:</label>
+                            <input type="text" id="author" name="author" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="public_date">Public Date:</label>
+                            <input type="date" id="public_date" name="public_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="file">File:</label>
+                            <input type="file" id="file" name="file" required>
+                        </div>
+                    </div>
+                    <!-- Right Column -->
+                    <div class="right-column">
+                        <div class="form-group" style="height: 332px;">
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="description" required></textarea>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="button add-button" name="add_document">Upload</button>
                     <button type="button" class="button cancel-button" onclick="closeAddModal()">Cancel</button>
+                    <button type="submit" class="button add-button" name="add_document">Upload</button>
                 </div>
             </form>
         </div>
@@ -177,26 +189,38 @@
         <div class="modal-content">
             <div class="modal-header">Edit Document</div>
             <form id="editDocumentForm" method="POST" enctype="multipart/form-data">
-                <input type="hidden" id="document_id" name="document_id">
-                <div class="form-group">
-                    <label for="edit_title">Title:</label>
-                    <input type="text" id="edit_title" name="title" required>
-                </div>
-                <div class="form-group">
-                    <label for="edit_author">Author:</label>
-                    <input type="text" id="edit_author" name="author" required>
-                </div>
-                <div class="form-group">
-                    <label for="edit_description">Description:</label>
-                    <textarea id="edit_description" name="description" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="edit_file">File (Leave blank to keep current file):</label>
-                    <input type="file" id="edit_file" name="file">
+                <div class="form-container">
+                    <!-- Left Column -->
+                    <div class="left-column">
+                        <input type="hidden" id="document_id" name="document_id">
+                        <div class="form-group">
+                            <label for="edit_title">Title:</label>
+                            <input type="text" id="edit_title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_author">Author:</label>
+                            <input type="text" id="edit_author" name="author" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_public_date">Public Date:</label>
+                            <input type="date" id="edit_public_date" name="public_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_file">File (Leave blank to keep current file):</label>
+                            <input type="file" id="edit_file" name="file">
+                        </div>
+                    </div>
+                    <!-- Right Column -->
+                    <div class="right-column">
+                        <div class="form-group" style="height: 332px;">
+                            <label for="edit_description">Description:</label>
+                            <textarea id="edit_description" name="description" required></textarea>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="button add-button" name="edit_document">Update</button>
                     <button type="button" class="button cancel-button" onclick="closeEditModal()">Cancel</button>
+                    <button type="submit" class="button add-button" name="edit_document">Update</button>
                 </div>
             </form>
         </div>
@@ -207,22 +231,33 @@
         <div class="modal-content">
             <div class="modal-header">Document Detail</div>
             <form id="detailDocumentForm" method="POST" enctype="multipart/form-data">
-                <input type="hidden" id="document_id" name="document_id">
-                <div class="form-group">
-                    <label for="detail_title">Title:</label>
-                    <input type="text" id="detail_title" name="title" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="detail_author">Author:</label>
-                    <input type="text" id="detail_author" name="author" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="detail_description">Description:</label>
-                    <textarea id="detail_description" name="description" readonly></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="detail_file">File:</label>
-                    <input type="text" id="detail-file" name="file" readonly>
+
+                <div class="form-container">
+                    <div class="left-column">
+                        <input type="hidden" id="document_id" name="document_id">
+                        <div class="form-group">
+                            <label for="detail_title">Title:</label>
+                            <input type="text" id="detail_title" name="title" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="detail_author">Author:</label>
+                            <input type="text" id="detail_author" name="author" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="detail_public_date">Public Date:</label>
+                            <input type="date" id="detail_public_date" name="public_date" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="detail_file">File:</label>
+                            <input type="text" id="detail-file" name="file" readonly>
+                        </div>
+                    </div>
+                    <div class="right-column">
+                        <div class="form-group" style="height: 332px;">
+                            <label for="detail_description">Description:</label>
+                            <textarea id="detail_description" name="description" readonly></textarea>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="button cancel-button" onclick="closeDetailModal()">Close</button>
@@ -438,17 +473,14 @@
             document.getElementById('addDocumentModal').style.display = 'none';
         }
 
-        function openEditModal(id, title, author, description) {
-            console.log("Opening edit modal for document ID:", id);
-            console.log("Title:", title);
-            console.log("Author:", author);
-            console.log("Description:", description);
-
+        // Open Edit Modal
+        function openEditModal(id, title, author, description, public_date) {
             // Set the values in the edit modal form
             document.getElementById('document_id').value = id;
             document.getElementById('edit_title').value = title;
             document.getElementById('edit_author').value = author;
             document.getElementById('edit_description').value = description;
+            document.getElementById('edit_public_date').value = public_date;
 
             // Display the edit modal
             document.getElementById('editDocumentModal').style.display = 'flex';
@@ -460,19 +492,14 @@
         }
 
         // Detail Modal
-        function openDetailModal(id, title, author, description, file_path) {
-            console.log("Opening detail modal for document ID:", id);
-            console.log("Title:", title);
-            console.log("Author:", author);
-            console.log("Description:", description);
-            console.log("File Path:", file_path);
-
+        function openDetailModal(id, title, author, description, file_path, public_date) {
             // Set the values in the detail modal form
             document.getElementById('document_id').value = id;
             document.getElementById('detail_title').value = title;
             document.getElementById('detail_author').value = author;
             document.getElementById('detail_description').value = description;
-            document.getElementById('detail-file').value = file_path; // Populate the file input field
+            document.getElementById('detail-file').value = file_path;
+            document.getElementById('detail_public_date').value = public_date;
 
             // Display the detail modal
             document.getElementById('detailDocumentModal').style.display = 'flex';

@@ -53,6 +53,7 @@
                         <th>Title</th>
                         <th>Description</th>
                         <th>Author</th>
+                        <th>Public Date</th>
                         <th>Uploaded At</th>
                         <th>Accessible</th>
                         <th>Actions</th>
@@ -62,9 +63,10 @@
                     <?php if ($result->num_rows > 0): ?>
                         <?php while ($row = $result->fetch_assoc()): ?>
                             <tr class="tr-data">
-                                <td><?php echo htmlspecialchars($row['title']); ?></td>
+                                <td class="description"> <a class="title-a" href="../view_with_download.php?id=<?php echo intval($row['id']); ?>"> <?php echo htmlspecialchars($row['title']); ?></a></td>
                                 <td class="description"><?php echo htmlspecialchars($row['description']); ?></td>
-                                <td><?php echo htmlspecialchars($row['author']) ?></td>
+                                <td class="description"><?php echo htmlspecialchars($row['author']) ?></td>
+                                <td><?php echo htmlspecialchars($row['public_date']) ?></td>
                                 <td class="upload-date"><?php echo htmlspecialchars($row['uploaded_at']); ?></td>
                                 <td class="accessible">
                                     <form method="POST" action="manage_documents.php" style="display:inline;" class="toggle-accessibility-form" data-document-id="<?php echo $row['id']; ?>">
@@ -78,8 +80,8 @@
                                     </form>
                                 </td>
                                 <td class="actions">
-                                    <a href="../view_with_download.php?id=<?php echo intval($row['id']); ?>" class="btn view">View</a>
-                                    <a href="#" onclick="openEditModal(<?php echo $row['id']; ?>, '<?php echo htmlspecialchars($row['title']); ?>', '<?php echo htmlspecialchars($row['author']); ?>', '<?php echo htmlspecialchars($row['description']); ?>')" class="btn edit">Edit</a>
+                                    <a onclick="openDetailModal(<?php echo $row['id']; ?>, '<?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['description'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['public_date'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['file_path'], ENT_QUOTES, 'UTF-8'); ?>')" class="btn view">Detail</a>
+                                    <a href="#" onclick="openEditModal(<?php echo $row['id']; ?>, '<?php echo htmlspecialchars($row['title']); ?>', '<?php echo htmlspecialchars($row['author']); ?>', '<?php echo htmlspecialchars($row['description']); ?>', '<?php echo htmlspecialchars($row['public_date']); ?>')" class="btn edit">Edit</a>
                                     <a href="#" class="btn delete" onclick="confirmDelete(<?php echo $row['id']; ?>, '<?php echo addslashes($row['title']); ?>')">Delete</a>
                                 </td>
                             </tr>
@@ -94,31 +96,43 @@
         </div>
     </div>
 
-    <!-- Upload Document Modal -->
+    <!-- Add Document Modal -->
     <div id="uploadModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeUploadModal()">&times;</span>
-            <h2>Upload Document</h2>
-            <!-- Upload Form -->
-            <form action="manage_documents.php" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" required>
+            <div class="modal-header">Add Document</div>
+            <form id="addDocumentForm" method="POST" enctype="multipart/form-data">
+                <div class="form-container">
+                    <!-- Left Column -->
+                    <div class="left-column">
+                        <div class="form-group">
+                            <label for="title">Title:</label>
+                            <input type="text" id="title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="author">Author:</label>
+                            <input type="text" id="author" name="author" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="public_date">Public Date:</label>
+                            <input type="date" id="public_date" name="public_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="file">File:</label>
+                            <input type="file" id="file" name="file" required>
+                        </div>
+                    </div>
+                    <!-- Right Column -->
+                    <div class="right-column">
+                        <div class="form-group" style="height: 332px;">
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="description" required></textarea>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea id="description" name="description" required></textarea>
+                <div class="modal-footer">
+                    <button type="button" class="cancel-button" onclick="closeAddModal()">Cancel</button>
+                    <button type="submit" class="add-button" name="add_document">Upload</button>
                 </div>
-                <div class="form-group">
-                    <label for="author">Author:</label>
-                    <input type="text" id="author" name="author" required>
-                </div>
-                <div class="form-group">
-                    <label for="document_file">File:</label>
-                    <input type="file" id="document_file" name="document_file" required>
-                </div>
-                <div class=""></div>
-                <button type="submit" name="upload_document" class="btn">Upload and Share</button>
             </form>
         </div>
     </div>
@@ -126,31 +140,80 @@
     <!-- Edit Document Modal -->
     <div id="editDocumentModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>Edit Document</h2>
-                <span class="close" onclick="closeEditModal()">&times;</span>
-            </div>
+            <div class="modal-header">Edit Document</div>
             <form id="editDocumentForm" method="POST" enctype="multipart/form-data">
-                <input type="hidden" id="document_id" name="document_id">
-                <div class="form-group">
-                    <label for="edit_title">Title:</label>
-                    <input type="text" id="edit_title" name="title" required>
-                </div>
-                <div class="form-group">
-                    <label for="edit_author">Author:</label>
-                    <input type="text" id="edit_author" name="author" required>
-                </div>
-                <div class="form-group">
-                    <label for="edit_description">Description:</label>
-                    <textarea id="edit_description" name="description" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="edit_file">File (Leave blank to keep current file):</label>
-                    <input type="file" id="edit_file" name="file">
+                <div class="form-container">
+                    <!-- Left Column -->
+                    <div class="left-column">
+                        <input type="hidden" id="document_id" name="document_id">
+                        <div class="form-group">
+                            <label for="edit_title">Title:</label>
+                            <input type="text" id="edit_title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_author">Author:</label>
+                            <input type="text" id="edit_author" name="author" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_public_date">Public Date:</label>
+                            <input type="date" id="edit_public_date" name="public_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_file">File (Leave blank to keep current file):</label>
+                            <input type="file" id="edit_file" name="file">
+                        </div>
+                    </div>
+                    <!-- Right Column -->
+                    <div class="right-column">
+                        <div class="form-group" style="height: 332px;">
+                            <label for="edit_description">Description:</label>
+                            <textarea id="edit_description" name="description" required></textarea>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn-update" name="edit_document">Update</button>
-                    <button type="button" class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+                    <button type="button" class="cancel-button" onclick="closeEditModal()">Cancel</button>
+                    <button type="submit" class="add-button" name="edit_document">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Detail Document Modal -->
+    <div id="detailDocumentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">Document Detail</div>
+            <form id="detailDocumentForm" method="POST" enctype="multipart/form-data">
+
+                <div class="form-container">
+                    <div class="left-column">
+                        <input type="hidden" id="document_id" name="document_id">
+                        <div class="form-group">
+                            <label for="detail_title">Title:</label>
+                            <input type="text" id="detail_title" name="title" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="detail_author">Author:</label>
+                            <input type="text" id="detail_author" name="author" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="detail_public_date">Public Date:</label>
+                            <input type="date" id="detail_public_date" name="public_date" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="detail_file">File:</label>
+                            <input type="text" id="detail-file" name="file" readonly>
+                        </div>
+                    </div>
+                    <div class="right-column">
+                        <div class="form-group" style="height: 332px;">
+                            <label for="detail_description">Description:</label>
+                            <textarea id="detail_description" name="description" readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="cancel-button" onclick="closeDetailModal()">Close</button>
                 </div>
             </form>
         </div>
@@ -267,7 +330,7 @@
         // Open Upload Modal
         function openUploadModal() {
             const modal = document.getElementById('uploadModal');
-            modal.style.display = 'block';
+            modal.style.display = 'flex';
         }
 
         // Close Upload Modal
@@ -277,13 +340,14 @@
         }
 
         // Open Edit Document Modal
-        function openEditModal(id, title, author, description) {
+        function openEditModal(id, title, author, description, public_date) {
             document.getElementById('document_id').value = id;
             document.getElementById('edit_title').value = title;
             document.getElementById('edit_author').value = author;
             document.getElementById('edit_description').value = description;
+            document.getElementById('edit_public_date').value = public_date
             document.getElementById('edit_file').value = '';
-            document.getElementById('editDocumentModal').style.display = 'block';
+            document.getElementById('editDocumentModal').style.display = 'flex';
         }
 
         // Close Edit Document Modal
@@ -291,10 +355,23 @@
             document.getElementById('editDocumentModal').style.display = 'none';
         }
 
-        // Close Edit Document Modal
-        function closeEditModal() {
-            document.getElementById('editDocumentModal').style.display = 'none';
+        function openDetailModal(id, title, author, description, public_date, file_path) {
+            // Set the values in the detail modal form
+            document.getElementById('document_id').value = id;
+            document.getElementById('detail_title').value = title;
+            document.getElementById('detail_author').value = author;
+            document.getElementById('detail_description').value = description;
+            document.getElementById('detail_public_date').value = public_date;
+            document.getElementById('detail-file').value = file_path; // Clear the file field
+            // Display the detail modal
+            document.getElementById('detailDocumentModal').style.display = 'flex';
         }
+
+        // Close Edit Document Modal
+        function closeDetailModal() {
+            document.getElementById('detailDocumentModal').style.display = 'none';
+        }
+
 
         // Confirmation Modal
         let documentIdToDelete;
@@ -308,7 +385,7 @@
             document.getElementById('documentTitle').textContent = title;
 
             // Display the modal
-            document.getElementById('confirmationModal').style.display = 'block';
+            document.getElementById('confirmationModal').style.display = 'flex';
         }
 
         function closeModal() {

@@ -32,6 +32,7 @@
                             <h3><?php echo htmlspecialchars($doc['title']); ?></h3>
                             <p class="description"><?php echo htmlspecialchars($doc['description']); ?></p>
                             <p class="author"><strong>Author:</strong> <?php echo htmlspecialchars($doc['author']); ?></p>
+                            <p class="author"><strong>Public Date:</strong> <?php echo htmlspecialchars($doc['public_date']); ?></p>
                             <button class="view-button" onclick="window.location.href='../view_page.php?id=<?php echo htmlspecialchars($doc['id']); ?>'">View</button>
                         </div>
                     <?php endforeach; ?>
