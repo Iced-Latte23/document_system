@@ -24,11 +24,11 @@ body {
 }
 
 /* Edit Button (Blue) */
-.edit-button {
+.detail-button {
     background-color: #007bff;
 }
 
-.edit-button:hover {
+.detail-button:hover {
     background-color: #0056b3;
 }
 
@@ -452,6 +452,7 @@ table {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
     font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
 }
 
 th,
@@ -483,7 +484,7 @@ td.description {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 200px;
+    max-width: 100px;
 }
 
 /* Alternate row colors */

@@ -1,6 +1,4 @@
 <?php
-// Start session
-session_start();
 
 // Include database connection
 require __DIR__ . '/../db_connect.php';
@@ -8,7 +6,7 @@ require __DIR__ . '/../session_check.php';
 
 // Fetch documents from the database
 $documents = [];
-$sql = "SELECT id, title, description, author, uploaded_at FROM tbl_documents";
+$sql = "SELECT id, title, description, author, uploaded_at FROM tbl_documents WHERE is_accessible = 1";
 $result = $conn->query($sql);
 
 if ($result) {

@@ -79,7 +79,7 @@
                                 </td>
                                 <td class="actions">
                                     <a href="../view_with_download.php?id=<?php echo intval($row['id']); ?>" class="btn view">View</a>
-                                    <a href="#" onclick="openEditModal(<?php echo $row['id']; ?>, '<?php echo addslashes($row['title']); ?>', '<?php echo addslashes($row['author']); ?>', '<?php echo addslashes($row['description']); ?>')" class="btn edit">Edit</a>
+                                    <a href="#" onclick="openEditModal(<?php echo $row['id']; ?>, '<?php echo htmlspecialchars($row['title']); ?>', '<?php echo htmlspecialchars($row['author']); ?>', '<?php echo htmlspecialchars($row['description']); ?>')" class="btn edit">Edit</a>
                                     <a href="#" class="btn delete" onclick="confirmDelete(<?php echo $row['id']; ?>, '<?php echo addslashes($row['title']); ?>')">Delete</a>
                                 </td>
                             </tr>

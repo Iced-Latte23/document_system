@@ -86,7 +86,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_document'])) {
 
 // Fetch documents from the database
 $documents = [];
-$sql = "SELECT id, title, description, author, uploaded_at, file_path FROM tbl_documents";
+$sql = "SELECT id, title, description, author, uploaded_at, file_path
+        FROM tbl_documents
+        WHERE is_accessible = 1";
 $result = $conn->query($sql);
 
 if ($result) {

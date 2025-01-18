@@ -1,5 +1,4 @@
 <?php require '../../processes/superadmin/manage_documents.php' ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -103,13 +102,11 @@
                         <?php while ($row = $result->fetch_assoc()): ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($row["id"]); ?></td>
-                                <td><?php echo htmlspecialchars($row["title"]); ?></td>
+                                <td class="description"><?php echo htmlspecialchars($row["title"]); ?></td>
                                 <td class="description"><?php echo htmlspecialchars($row["description"]); ?></td>
-                                <td><?php echo htmlspecialchars($row["author"]); ?></td>
+                                <td class="description"><?php echo htmlspecialchars($row["author"]); ?></td>
                                 <td>
-                                    <!-- <a href="../../view_page.php?id=<? echo urlencode(basename($row["file_path"])); ?>" target="_blank">View File</a> -->
                                     <a href="../view_with_download.php?id=<?php echo intval($row['id']); ?>" class="btn view" target="_blank">View</a>
-
                                 </td>
                                 <td><?php echo htmlspecialchars($row["file_type"]); ?></td>
                                 <td><?php echo htmlspecialchars($row["uploaded_by_name"]); ?></td>
@@ -124,9 +121,10 @@
                                         </label>
                                     </form>
                                 </td>
-                                <td><?php echo htmlspecialchars($row["uploaded_at"]); ?></td>
-                                <td><?php echo htmlspecialchars($row["updated_at"]); ?></td>
+                                <td><?php echo (new DateTime($row["uploaded_at"]))->format('Y-m-d'); ?></td>
+                                <td><?php echo (new DateTime($row["updated_at"]))->format('Y-m-d'); ?></td>
                                 <td class="actions">
+                                    <button class="button detail-button" onclick="openDetailModal(<?php echo $row['id']; ?>, '<?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['description'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['file_path'], ENT_QUOTES, 'UTF-8'); ?>')">Detail</button>
                                     <button class="button edit-button" onclick="openEditModal(<?php echo $row['id']; ?>, '<?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?>', '<?php echo htmlspecialchars($row['description'], ENT_QUOTES, 'UTF-8'); ?>')">Edit</button>
                                     <button class="button delete-button" onclick="confirmDelete(<?php echo $row['id']; ?>, '<?php echo addslashes($row['title']); ?>')">Delete</button>
                                 </td>
@@ -196,6 +194,35 @@
                 <div class="modal-footer">
                     <button type="submit" class="button add-button" name="edit_document">Update</button>
                     <button type="button" class="button cancel-button" onclick="closeEditModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Detail Document Modal -->
+    <div id="detailDocumentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">Document Detail</div>
+            <form id="detailDocumentForm" method="POST" enctype="multipart/form-data">
+                <input type="hidden" id="document_id" name="document_id">
+                <div class="form-group">
+                    <label for="detail_title">Title:</label>
+                    <input type="text" id="detail_title" name="title" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="detail_author">Author:</label>
+                    <input type="text" id="detail_author" name="author" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="detail_description">Description:</label>
+                    <textarea id="detail_description" name="description" readonly></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="detail_file">File:</label>
+                    <input type="text" id="detail-file" name="file" readonly>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="button cancel-button" onclick="closeDetailModal()">Close</button>
                 </div>
             </form>
         </div>
@@ -429,6 +456,30 @@
             document.getElementById('editDocumentModal').style.display = 'none';
         }
 
+        // Detail Modal
+        function openDetailModal(id, title, author, description, file_path) {
+            console.log("Opening detail modal for document ID:", id);
+            console.log("Title:", title);
+            console.log("Author:", author);
+            console.log("Description:", description);
+            console.log("File Path:", file_path);
+
+            // Set the values in the detail modal form
+            document.getElementById('document_id').value = id;
+            document.getElementById('detail_title').value = title;
+            document.getElementById('detail_author').value = author;
+            document.getElementById('detail_description').value = description;
+            document.getElementById('detail-file').value = file_path; // Populate the file input field
+
+            // Display the detail modal
+            document.getElementById('detailDocumentModal').style.display = 'flex';
+        }
+
+        // Close Detail Document Modal
+        function closeDetailModal() {
+            document.getElementById('detailDocumentModal').style.display = 'none';
+        }
+
         let documentIdToDelete = null;
 
         // Function to open the confirmation modal
@@ -476,6 +527,7 @@
             const uploadModal = document.getElementById('addDocumentModal');
             const editModal = document.getElementById('editDocumentModal');
             const confirmationModal = document.getElementById('confirmationModal');
+            const detailModal = document.getElementById('detailDocumentModal');
             if (event.target === uploadModal) {
                 uploadModal.style.display = 'none';
             }
@@ -484,6 +536,9 @@
             }
             if (event.target === confirmationModal) {
                 confirmationModal.style.display = 'none';
+            }
+            if (event.target === detailModal) {
+                detailModal.style.display = 'none';
             }
         };
 

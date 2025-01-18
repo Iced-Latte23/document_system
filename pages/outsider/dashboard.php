@@ -1,4 +1,4 @@
-<?php require '../../processes/student/dashboard.php' ?>
+<?php require '../../processes/outsider/dashboard.php' ?>
 
 <!DOCTYPE html>
 <html lang="en">
